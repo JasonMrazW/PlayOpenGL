@@ -3,7 +3,9 @@ project(playOpenGL)
 
 # glfw和glew的头文件目录，这是我的路径，你可以换成你自己的
 include_directories(/usr/local/include)
+include_directories(include/glad)
 aux_source_directory("./" SRCS)
+
 
 set(CMAKE_CXX_FLAGS "-g -std=c++11 -Wformat")
 
@@ -16,7 +18,7 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
     link_directories(/opt/homebrew/Cellar/glfw/3.3.4/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp)
+add_executable(playOpenGL main.cpp glad.c)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)
