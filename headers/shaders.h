@@ -18,16 +18,16 @@ public:
 
     void onDestroy() override;
 private:
-    const char *vertex_shader = "#version 330 core\n"
+    const char *vertex_shader_source = "#version 330 core\n"
                                 "layout (location = 0) in vec3 pos;\n"
                                 "out vec4 renderColor;\n"
                                 "void main()\n"
                                 "{\n"
-                                "   gl_Position = vec4(aPos, 1.0f);"
-                                "   renderColor = vec4(0.2f, 0.3f, 0.4f, 1.0f);"
+                                "   gl_Position = vec4(pos, 1.0f);"
+                                "   renderColor = vec4(0.5f, 0.5f, 1.0f, 1.0f);"
                                 "}\n\0";
 
-    const char *fragment_shader = "#version 330 core\n"
+    const char *fragment_shader_source = "#version 330 core\n"
                                   "in vec4 renderColor;\n"
                                   "out vec4 FragColor;"
                                   "void main()\n"
@@ -43,6 +43,7 @@ private:
 
     uint32_t VBO;
     uint32_t VAO;
+    uint32_t shaderProgram;
 };
 
 #endif //PLAYOPENGL_SHADERS_H
