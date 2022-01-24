@@ -18,6 +18,15 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
     link_directories(/opt/homebrew/Cellar/glfw/3.3.4/lib)
 endif ()
 
+if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
+    # glew的库目录路径
+    include_directories(/usr/local/Cellar/glew/2.2.0_1/include/)
+    link_directories(/usr/local/Cellar/glew/2.2.0_1/lib)
+    # glfw的库目录路径
+    include_directories(/usr/local/Cellar/glfw/3.3.6/include/)
+    link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
+endif ()
+
 add_executable(playOpenGL main.cpp glad.c)
 
 # 指定glew库

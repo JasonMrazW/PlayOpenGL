@@ -5,22 +5,22 @@
 using namespace std;
 
 const char *vertex_shader_source = "#version 330 core\n"
-                                    "layout (location = 12) in vec3 aPos;\n"
+                                    "layout (location = 0) in vec3 aPos;\n"
                                     "void main()\n"
                                     "{\n"
                                     "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
-                                    "}\0";
+                                    "}\n\0";
 
 const char *fragment_shader_source = "#version 330 core\n"
-                                     "out vec4 fragColor;\n"
+                                     "out vec4 FragColor;\n"
                                      "void main()\n"
                                      "{\n"
-                                     "  fragColor = vec4(1.0f, 1.0f, 0.5f, 1.0f);"
-                                     "}\0";
+                                     "  FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);"
+                                     "}\n\0";
 
 float vertices[] = {
         -0.5f, -0.5f, 0.0f,
-        0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
         0.0f, 0.5f, 0.0f
 };
 
@@ -59,6 +59,11 @@ uint32_t createVBO() {
     glGenBuffers(1, &VBO);
 }
 
+uint32_t createVAO() {
+    uint32_t VAO;
+    glGenVertexArrays(1, &VAO);
+}
+
 int main() {
     GLFWwindow* window;
     /* Initialize the library */
@@ -70,7 +75,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(540, 960, "glWindow", NULL, NULL);
+    window = glfwCreateWindow(540, 540, "glWindow", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -107,38 +112,46 @@ int main() {
         cout << "create shader program failed.\n" << info << endl;
         return -1;
     }
-
-
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
+    //----------------------------------------
     //create VBO
     uint32_t vbo_buffer = createVBO();
+    uint32_t vao_array = createVAO();
 
+    glBindVertexArray(vao_array);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         process_input(window);
         /* Render here */
-
-
-        glBindBuffer(GL_ARRAY_BUFFER, vbo_buffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof (vertices), vertices, GL_STATIC_DRAW);
-
-        glVertexAttribIPointer(0, 3, GL_FLOAT, 3 * sizeof(GLfloat), (GLvoid*)nullptr);
-        glEnableVertexAttribArray(0);
-
-        glUseProgram(shaderProgram);
-
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glUseProgram(shaderProgram);
+        glBindVertexArray(vao_array);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
         /* Poll for and process events */
         glfwPollEvents();
     }
+
+    glDeleteVertexArrays(1, &vao_array);
+    glDeleteBuffers(1, &vbo_buffer);
+    glDeleteProgram(shaderProgram);
 
     glfwTerminate();
     return 0;
