@@ -18,11 +18,36 @@ const char *fragment_shader_source = "#version 330 core\n"
                                      "  FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);"
                                      "}\n\0";
 
+//float vertices[] = {
+//        -0.5f, -0.5f, 0.0f,
+//        0.5f, -0.5f, 0.0f,
+//        0.0f, 0.5f, 0.0f,
+//        0.5f, 0.5f,0.0f
+//};
+
 float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f
+        0.5f,  0.5f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left
 };
+unsigned int indices[] = {  // note that we start from 0!
+        0, 1, 3,  // first Triangle
+        1, 2, 3   // second Triangle
+};
+
+//
+//unsigned int indicators[] {
+//    0, 1, 3,   // first triangle
+//    1, 2, 3    // second triangle
+//};
+//
+//float vertices[] = {
+//        0.5f,  0.5f, 0.0f,  // top right
+//        0.5f, -0.5f, 0.0f,  // bottom right
+//        -0.5f, -0.5f, 0.0f,  // bottom left
+//        -0.5f,  0.5f, 0.0f   // top left
+//};
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     glViewport(0,0,width/2,height/2);
@@ -54,9 +79,9 @@ uint32_t createShader(uint32_t shader_type, const char *source) {
     return shader;
 }
 
-uint32_t createVBO() {
-    uint32_t VBO;
-    glGenBuffers(1, &VBO);
+uint32_t createBuffers() {
+    uint32_t buffer;
+    glGenBuffers(1, &buffer);
 }
 
 uint32_t createVAO() {
@@ -117,18 +142,25 @@ int main() {
 
     //----------------------------------------
     //create VBO
-    uint32_t vbo_buffer = createVBO();
+    uint32_t vbo_buffer = createBuffers();
+    uint32_t ebo_buffer = createBuffers();
     uint32_t vao_array = createVAO();
+
 
     glBindVertexArray(vao_array);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof (vertices), vertices, GL_STATIC_DRAW);
 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_buffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof (indices), indices, GL_STATIC_DRAW);
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
     glEnableVertexAttribArray(0);
 
+    //clear bind relation
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
     /* Loop until the user closes the window */
@@ -141,7 +173,9 @@ int main() {
 
         glUseProgram(shaderProgram);
         glBindVertexArray(vao_array);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        //glBindVertexArray(0);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
