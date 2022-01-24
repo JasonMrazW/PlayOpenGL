@@ -1,6 +1,7 @@
 //
 // Created by bo on 2022/1/24.
 //
+#include <cmath>
 #include "headers/shaders.h"
 constexpr float Shaders::vertices[];
 
@@ -46,7 +47,14 @@ void Shaders::onInit() {
 }
 
 void Shaders::onDraw() {
+
+    float time = glfwGetTime();
+    float greenValue = (sin(time)/2.0f) + 0.5f; //-0.5~0.5===>0~1
+    int vertexColorLocation = glGetUniformLocation(shaderProgram, "renderColor");
+
     glUseProgram(shaderProgram);
+    glUniform4f(vertexColorLocation, 1.0f, greenValue, 0.0f, 1.0f);
+
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);

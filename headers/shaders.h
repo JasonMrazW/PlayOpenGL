@@ -28,12 +28,12 @@ private:
                                 "}\n\0";
 
     const char *fragment_shader_source = "#version 330 core\n"
-                                  "in vec4 renderColor;\n"
-                                  "out vec4 FragColor;"
-                                  "void main()\n"
-                                  "{\n"
-                                  " FragColor = renderColor;"
-                                  "}\n\0";
+                                         "uniform vec4 renderColor;\n"
+                                         "out vec4 FragColor;"
+                                         "void main()\n"
+                                         "{\n"
+                                         "  FragColor = renderColor;"
+                                         "}\n\0";
 
     constexpr static float vertices[] = {
             -0.5f, -0.5f, 0.0f,
