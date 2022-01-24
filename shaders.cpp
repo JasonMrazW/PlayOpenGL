@@ -1,7 +1,15 @@
 //
 // Created by bo on 2022/1/24.
 //
-#include <glad.h>
-#include <glfw/glfw3.h>
+#include "headers/shaders.h"
 
+void Shaders::onInit() {
+
+}
+
+void Shaders::onDraw() {
+}
+
+void Shaders::onDestroy() {
+}
 

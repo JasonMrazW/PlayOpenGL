@@ -3,10 +3,10 @@
 //
 #include "headers/triangle.h"
 using namespace std;
-constexpr float TriangleDemo::vertices[];
-constexpr unsigned int TriangleDemo::indicators[];
+constexpr float Triangle::vertices[];
+constexpr unsigned int Triangle::indicators[];
 
-void TriangleDemo::onInit() {
+void Triangle::onInit() {
     //create shader
     uint32_t vertexShader = GLUtils::createShader(GL_VERTEX_SHADER, vertex_shader_source);
     uint32_t fragmentShader = GLUtils::createShader(GL_FRAGMENT_SHADER, fragment_shader_source);
@@ -62,13 +62,16 @@ void TriangleDemo::onInit() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void TriangleDemo::onDraw() {
+void Triangle::onDraw() {
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+    //glDrawArrays(GL_TRIANGLES, 0, 3);
+    //glBindVertexArray(0);
 }
 
-void TriangleDemo::onDestroy() {
+void Triangle::onDestroy() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);

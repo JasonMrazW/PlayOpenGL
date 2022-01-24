@@ -27,7 +27,7 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
     link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp glad.c shaders.cpp triangle.cpp headers/triangle.h headers/GLUtils.h)
+add_executable(playOpenGL main.cpp glad.c shaders.cpp triangle.cpp headers/triangle.h headers/GLUtils.h headers/shaders.h headers/IRender.h)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)

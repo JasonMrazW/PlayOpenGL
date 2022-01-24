@@ -1,6 +1,4 @@
 #include <iostream>
-#include <glad.h>
-#include <GLFW/glfw3.h>
 #include "headers/triangle.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -41,10 +39,14 @@ int main() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    TriangleDemo *demo = new TriangleDemo();
-    demo->onInit();
+    IRender *render = reinterpret_cast<IRender *>(new Triangle());
+    render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    int attr_number;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &attr_number);
+    std::cout << "max attr nums:" << attr_number << endl;
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -54,9 +56,7 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        demo->onDraw();
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
-        //glBindVertexArray(0);
+        render->onDraw();
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
@@ -64,7 +64,7 @@ int main() {
         glfwPollEvents();
     }
 
-    demo->onDestroy();
+    render->onDestroy();
 
     glfwTerminate();
     return 0;

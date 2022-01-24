@@ -5,18 +5,19 @@
 #ifndef PLAYOPENGL_TRIANGLE_H
 #define PLAYOPENGL_TRIANGLE_H
 #include "GLUtils.h"
+#include "IRender.h"
 #include <iostream>
 
-class TriangleDemo {
+class Triangle:  IRender{
 public:
-    TriangleDemo() {}
-    ~TriangleDemo() {}
+    Triangle():IRender() {}
+    ~Triangle() {}
 
-    void onInit();
+    void onInit() override;
 
-    void onDraw();
+    void onDraw() override;
 
-    void onDestroy();
+    void onDestroy() override;
 
 private:
     const char *vertex_shader_source = "#version 330 core\n"
