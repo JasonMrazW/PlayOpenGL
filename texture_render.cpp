@@ -42,29 +42,19 @@ void TextureRender::onInit() {
     glBindVertexArray(0);
 
     //create texture
-    glGenTextures(1, &textureId);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    int width, height, nrChannels;
-    uint8_t *data = stbi_load("resources/imgs/container.jpg", &width, &height, &nrChannels, 0);
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
-        cout << "load local image failed." << endl;
-    }
-    stbi_image_free(data);
-//    shader->use();
-//    shader->setInt("texture1", 0);
+    textureA = createTexture("resources/imgs/container.jpg", GL_RGB);
+    textureB = createTexture("resources/imgs/awesomeface.png", GL_RGBA);
+    shader->use();
+    shader->setInt("texture1", 0);
+    shader->setInt("texture2", 1);
 }
 
 void TextureRender::onDraw() {
-    glBindTexture(GL_TEXTURE_2D, textureId);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureA);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, textureB);
+
     shader->use();
 
     glBindVertexArray(VAO);
@@ -75,4 +65,30 @@ void TextureRender::onDestroy() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
+}
+
+uint32_t TextureRender::createTexture(const char *imagePath, uint32_t rgbFormat) {
+    uint32_t textureId;
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    stbi_set_flip_vertically_on_load(true);
+
+    int width, height, nrChannels;
+    uint8_t *data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, rgbFormat, width, height, 0, rgbFormat, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        cout << "load local image failed." << endl;
+    }
+    stbi_image_free(data);
+
+    return textureId;
 }

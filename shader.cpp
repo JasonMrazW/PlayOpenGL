@@ -30,8 +30,6 @@ Shader::Shader(const char *vertex_shader_path, const char *fragment_shader_path)
 
         vertex_source = vertex_shader_stream.str();
         fragment_source = fragment_shader_stream.str();
-
-        cout << "vertex source:" << vertex_source << endl;
     } catch (ifstream::failure e) {
         cerr << "load shader source file failed.\n" << "code:" << e.code() << " msg:" << e.what() << endl;
     }

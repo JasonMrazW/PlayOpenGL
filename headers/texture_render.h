@@ -21,10 +21,13 @@ private:
 
     void onDestroy() override;
 
+    uint32_t createTexture(const char* imagePath, uint32_t rgbFormat);
+
     uint32_t VAO;
     uint32_t VBO;
     uint32_t EBO;
-    uint32_t textureId = -1;
+    uint32_t textureA = -1;
+    uint32_t textureB = -1;
 
     constexpr static float verticesAndColors[] = {
             // positions          // colors           // texture coords
