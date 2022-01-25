@@ -4,7 +4,7 @@
 
 #ifndef PLAYOPENGL_GLUTILS_H
 #define PLAYOPENGL_GLUTILS_H
-#include <glad.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 

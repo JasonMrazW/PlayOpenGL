@@ -4,6 +4,8 @@
 
 #ifndef PLAYOPENGL_IRENDER_H
 #define PLAYOPENGL_IRENDER_H
+#include "shader.h"
+
 class IRender {
 public:
     IRender() {}
@@ -11,5 +13,8 @@ public:
     virtual void onInit() = 0;
     virtual void onDraw() = 0;
     virtual void onDestroy() = 0;
+
+protected:
+    Shader *shader = nullptr;
 };
 #endif //PLAYOPENGL_IRENDER_H

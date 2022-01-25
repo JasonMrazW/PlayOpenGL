@@ -3,7 +3,7 @@ project(playOpenGL)
 
 # glfw和glew的头文件目录，这是我的路径，你可以换成你自己的
 include_directories(/usr/local/include)
-include_directories(include/glad)
+include_directories(include/)
 aux_source_directory("./" SRCS)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -27,12 +27,12 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
     link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp glad.c shader_render.cpp triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp)
+add_executable(playOpenGL main.cpp glad.c shader_render.cpp triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp texture_render.cpp headers/texture_render.h)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)
 # 指定glfw库
 target_link_libraries(playOpenGL GLFW)
-#1234
+#
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 message("========CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

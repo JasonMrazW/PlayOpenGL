@@ -6,7 +6,6 @@
 #define PLAYOPENGL_SHADER_RENDER_H
 #include "GLUtils.h"
 #include "IRender.h"
-#include "shader.h"
 
 class ShaderRender: IRender {
 public:
@@ -19,7 +18,7 @@ public:
 
     void onDestroy() override;
 private:
-    Shader *shader = nullptr;
+
     constexpr static float vertices[] = {
             -0.5f, -0.5f, 0.0f,
             0.0f, -0.5f, 0.0f,
@@ -35,7 +34,6 @@ private:
 
     uint32_t VBO;
     uint32_t VAO;
-    uint32_t shaderProgram;
 };
 
 #endif //PLAYOPENGL_SHADER_RENDER_H

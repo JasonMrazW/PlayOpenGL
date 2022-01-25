@@ -18,5 +18,7 @@ public:
     void use();
 
     void setFloat(const std::string &valueName, float value) const;
+
+    void setInt(const std::string &valueName, float value) const;
 };
 #endif //PLAYOPENGL_SHADER_H
