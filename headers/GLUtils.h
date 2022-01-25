@@ -26,7 +26,7 @@ static uint32_t createShader(uint32_t shader_type, const char *source) {
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
     if (!success) {
         glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-        std::cout << "create vertex shader failed.\n" << infoLog << std::endl;
+        std::cout << "create shader failed.\n" << infoLog << std::endl;
         return -1;
     }
     return shader;

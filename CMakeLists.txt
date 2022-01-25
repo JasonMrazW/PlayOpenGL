@@ -6,7 +6,7 @@ include_directories(/usr/local/include)
 include_directories(include/glad)
 aux_source_directory("./" SRCS)
 
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_CXX_FLAGS "-g -std=c++11 -Wformat")
 
 if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
@@ -27,11 +27,12 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
     link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp glad.c shaders.cpp triangle.cpp headers/triangle.h headers/GLUtils.h headers/shaders.h headers/IRender.h)
+add_executable(playOpenGL main.cpp glad.c shader_render.cpp triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)
 # 指定glfw库
 target_link_libraries(playOpenGL GLFW)
-
-
+#1234
+file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+message("========CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

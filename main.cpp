@@ -1,6 +1,6 @@
 #include <iostream>
 #include "headers/triangle.h"
-#include "headers/shaders.h"
+#include "headers/shader_render.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     glViewport(0,0,width/2,height/2);
@@ -40,7 +40,7 @@ int main() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    IRender *render = reinterpret_cast<IRender *>(new Shaders());
+    IRender *render = reinterpret_cast<IRender *>(new ShaderRender());
     render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
