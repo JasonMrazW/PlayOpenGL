@@ -29,6 +29,8 @@ private:
     uint32_t textureA = -1;
     uint32_t textureB = -1;
 
+    //texture coords: 指定texture的比例，1.0表示与图像大小一致，0.5某项仅50%
+    //例如：全0.5，表示texture大小是原来的1/4大小
     constexpr static float verticesAndColors[] = {
             // positions          // colors           // texture coords
             0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right

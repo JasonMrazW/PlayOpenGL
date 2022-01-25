@@ -35,4 +35,4 @@ target_link_libraries(playOpenGL GLEW)
 target_link_libraries(playOpenGL GLFW)
 #
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-message("==========CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+message("===========CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")

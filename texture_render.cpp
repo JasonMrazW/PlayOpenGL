@@ -4,6 +4,7 @@
 
 #include "headers/texture_render.h"
 #include <iostream>
+#include <cmath>
 
 const char *TextureRender::vShaderPath = "resources/shaders/textures/vShader.vs";
 const char *TextureRender::fShaderPath = "resources/shaders/textures/fShader.fs";
@@ -55,6 +56,9 @@ void TextureRender::onDraw() {
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, textureB);
 
+    float time = glfwGetTime();
+    float greenValue = (sin(time)/2.0f) + 0.5f; //-0.5~0.5===>0~1
+    shader->setFloat("mixValue", greenValue);
     shader->use();
 
     glBindVertexArray(VAO);
@@ -75,8 +79,8 @@ uint32_t TextureRender::createTexture(const char *imagePath, uint32_t rgbFormat)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     stbi_set_flip_vertically_on_load(true);
 
