@@ -2,7 +2,7 @@
 // Created by bo on 2022/1/25.
 //
 
-#include "headers/texture_render.h"
+#include "../headers/texture_render.h"
 #include <iostream>
 #include <cmath>
 

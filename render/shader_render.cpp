@@ -2,7 +2,7 @@
 // Created by bo on 2022/1/24.
 //
 #include <cmath>
-#include "headers/shader_render.h"
+#include "../headers/shader_render.h"
 constexpr float ShaderRender::vertices[];
 constexpr float ShaderRender::verticesAndColors[];
 

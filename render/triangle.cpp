@@ -1,7 +1,7 @@
 //
 // Created by bo on 2022/1/24.
 //
-#include "headers/triangle.h"
+#include "../headers/triangle.h"
 using namespace std;
 constexpr float Triangle::vertices[];
 constexpr unsigned int Triangle::indicators[];
