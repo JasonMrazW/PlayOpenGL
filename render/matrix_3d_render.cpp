@@ -10,6 +10,9 @@ void Matrix3DRender::onInit() {
 
     shader = new Shader(vShaderPath, fShaderPath);
 
+    //开启z缓冲深度检测，防止画面被覆盖
+    glEnable(GL_DEPTH_TEST);
+
     //create VBO、VAO
     VAO = GLUtils::createVAO();
     VBO = GLUtils::createBuffers();
