@@ -7,7 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <std/std_image.h>
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
-    glViewport(0,0,width/2,height/2);
+    glViewport(0,0,width,height);
 }
 
 void process_input(GLFWwindow *window) {
@@ -15,7 +15,6 @@ void process_input(GLFWwindow *window) {
         glfwSetWindowShouldClose(window,true);
     }
 }
-
 
 int main() {
     GLFWwindow* window;

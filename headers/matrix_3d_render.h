@@ -18,6 +18,8 @@ private:
     void onInit() override;
 
     void onDraw() override;
+
+    glm::vec3 *cubePositions = nullptr;
 };
 
 
