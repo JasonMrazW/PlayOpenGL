@@ -20,5 +20,7 @@ public:
     void setFloat(const std::string &valueName, float value) const;
 
     void setInt(const std::string &valueName, float value) const;
+
+    void setMatrix(const std::string &valueName, const float *matrix) const;
 };
 #endif //PLAYOPENGL_SHADER_H

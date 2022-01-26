@@ -2,6 +2,7 @@
 #include "headers/triangle.h"
 #include "headers/shader_render.h"
 #include "headers/texture_render.h"
+#include "headers/matrix_render.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <std/std_image.h>
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
@@ -42,7 +43,7 @@ int main() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    IRender *render = reinterpret_cast<IRender *>(new TextureRender());
+    IRender *render = reinterpret_cast<IRender *>(new MatrixRender());
     render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

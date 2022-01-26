@@ -9,15 +9,13 @@
 #include "shader.h"
 #include <std/std_image.h>
 
-class TextureRender: IRender {
+class TextureRender: public IRender {
 public:
     TextureRender():IRender(){}
     ~TextureRender(){}
 
 private:
     void onInit() override;
-
-    void onDraw() override;
 
     void onDestroy() override;
 
@@ -33,10 +31,10 @@ private:
     //例如：全0.5，表示texture大小是原来的1/4大小
     constexpr static float verticesAndColors[] = {
             // positions          // colors           // texture coords
-            0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-            0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-            -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-            -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+            0.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+            0.0f,  0.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+            -1.0f, 0.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+            -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
     };
 
     constexpr static uint32_t indices[] = {
@@ -46,6 +44,8 @@ private:
 
     const static char *vShaderPath;
     const static char *fShaderPath;
+protected:
+    void onDraw() override;
 };
 
 #endif //PLAYOPENGL_TEXTURE_RENDER_H
