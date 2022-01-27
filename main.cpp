@@ -48,7 +48,7 @@ int main() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    render = reinterpret_cast<IRender *>(new Matrix3DRender());
+    render = reinterpret_cast<IRender *>(new MatrixRender());
     render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

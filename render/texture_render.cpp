@@ -59,8 +59,8 @@ void TextureRender::onDraw() {
     float time = glfwGetTime();
     float greenValue = (sin(time)/2.0f) + 0.5f; //-0.5~0.5===>0~1
     shader->setFloat("mixValue", greenValue);
-    shader->use();
 
+    shader->use();
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
