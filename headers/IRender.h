@@ -14,6 +14,10 @@ public:
     virtual void onDraw() = 0;
     virtual void onDestroy() = 0;
 
+    virtual void onInput(GLFWwindow *pWwindow) {
+
+    }
+
 protected:
     Shader *shader = nullptr;
 };
