@@ -14,7 +14,15 @@ public:
     virtual void onDraw() = 0;
     virtual void onDestroy() = 0;
 
-    virtual void onInput(GLFWwindow *pWwindow) {
+    virtual void onInput(GLFWwindow *window) {
+
+    }
+
+    virtual void onCursorInput(GLFWwindow *window, double xPos, double yPos) {
+
+    }
+
+    virtual void onScroll(GLFWwindow *window, double xPos, double yPos) {
 
     }
 

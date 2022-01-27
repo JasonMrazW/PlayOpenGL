@@ -106,7 +106,7 @@ void Matrix3DRender::onDraw() {
                        cameraUp);
 
     glm::mat4 projection = glm::mat4 (1.0f);
-    projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(fov), 1.0f, 0.1f, 100.0f);
 
     shader->setMatrix("view", glm::value_ptr(view));
     shader->setMatrix("projection", glm::value_ptr(projection));
@@ -134,6 +134,12 @@ void Matrix3DRender::onDraw() {
 }
 
 void Matrix3DRender::onInput(GLFWwindow *window) {
+    float currentTime = glfwGetTime();
+    deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+
+    cameraSpeed = 10.0f * deltaTime;
+
     //拉进摄像机和中心点的距离
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
         cameraPos += cameraSpeed * cameraFront;
@@ -154,5 +160,49 @@ void Matrix3DRender::onInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
         //求出X轴的向量
         cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    }
+}
+
+void Matrix3DRender::onCursorInput(GLFWwindow *window, double xPos, double yPos) {
+    if (isFirstRender) {
+        lastXPos = xPos;
+        lastYPos = yPos;
+        isFirstRender = false;
+    }
+
+    float xOffset = xPos - lastXPos;
+    float yOffset = lastYPos - yPos;
+    lastXPos = xPos;
+    lastYPos = yPos;
+
+    float sensitivity = 0.05f;
+    xOffset *= sensitivity;
+    yOffset *= sensitivity;
+
+    yaw += xOffset;
+    pitch += yOffset;
+
+    if (pitch > 89.0f) pitch = 89.0f;
+    if (pitch < -89.0f) pitch = -89.0f;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+    cameraFront = glm::normalize(front);
+}
+
+void Matrix3DRender::onScroll(GLFWwindow *window, double xPos, double yPos) {
+    if (fov >= 1.0f && fov <= 45.0f) {
+        fov -= yPos;
+    }
+
+    if (fov <= 1.0f) {
+        fov = 1.0f;
+    }
+
+    if (fov >= 45.0f) {
+        fov = 45.0f;
     }
 }

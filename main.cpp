@@ -16,6 +16,11 @@ void process_input(GLFWwindow *window) {
     }
 }
 
+void process_mouse_input(GLFWwindow *window, double xpos, double ypos);
+void process_scroll_input(GLFWwindow *window, double xPos, double yPos);
+
+IRender *render = nullptr;
+
 int main() {
     GLFWwindow* window;
     /* Initialize the library */
@@ -43,7 +48,7 @@ int main() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    IRender *render = reinterpret_cast<IRender *>(new Matrix3DRender());
+    render = reinterpret_cast<IRender *>(new Matrix3DRender());
     render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -51,6 +56,11 @@ int main() {
     int attr_number;
     glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &attr_number);
     std::cout << "max attr nums:" << attr_number << endl;
+
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, process_mouse_input);
+
+    glfwSetScrollCallback(window, process_scroll_input);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -73,4 +83,12 @@ int main() {
 
     glfwTerminate();
     return 0;
+}
+
+void process_mouse_input(GLFWwindow *window, double xPos, double yPos) {
+    render->onCursorInput(window, xPos, yPos);
+}
+
+void process_scroll_input(GLFWwindow *window, double xPos, double yPos) {
+    render->onScroll(window, xPos, yPos);
 }

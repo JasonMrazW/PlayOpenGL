@@ -21,12 +21,24 @@ private:
 
     void onInput(GLFWwindow *window) override;
 
+    void onCursorInput(GLFWwindow *window, double xPos, double yPos) override;
+
+    void onScroll(GLFWwindow *window, double xPos, double yPos) override;
+
     glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
     glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
     glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
 
-    const float cameraSpeed = 0.05f;
+    float cameraSpeed = 0.05f;
+    float deltaTime = 0.0f;
+    float lastTime =0.0f;
 
+    float lastXPos, lastYPos;
+    bool isFirstRender = true;
+
+    float yaw = -90.0f, pitch = 0.0f;
+
+    float fov = 45.0f;
 };
 
 
