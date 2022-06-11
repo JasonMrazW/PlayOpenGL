@@ -7,6 +7,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "../headers/IRender.h"
 
 using namespace std;
 
@@ -20,6 +21,9 @@ public:
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
     static void processInput(GLFWwindow* window);
+
+private:
+    IRender *render = nullptr;
 };
 
 

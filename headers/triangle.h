@@ -2,7 +2,7 @@
 // Created by bo on 2022/1/24.
 //
 
-#ifndef PLAYOPENGL_TRIANGLE_H
+#ifndef PLAYOPENGL_TRIANGLE_RENDER_H
 #define PLAYOPENGL_TRIANGLE_H
 #include "GLUtils.h"
 #include "IRender.h"
@@ -51,4 +51,4 @@ private:
         1, 2, 3    // second triangle
     };
 };
-#endif //PLAYOPENGL_TRIANGLE_H
+#endif //PLAYOPENGL_TRIANGLE_RENDER_H

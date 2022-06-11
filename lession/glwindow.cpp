@@ -3,6 +3,7 @@
 //
 
 #include "glwindow.h"
+#include "render/triangle_render.h"
 
 GLWindow::GLWindow() {
 
@@ -26,7 +27,7 @@ void GLWindow::init() {
     //no border
     glfwWindowHint(GLFW_DECORATED, GL_FALSE);
     //transparent background
-    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GL_TRUE);
+    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GL_FALSE);
 
     //create window
     GLFWwindow *window = glfwCreateWindow(800, 800, "opengl window", NULL, NULL);
@@ -45,9 +46,12 @@ void GLWindow::init() {
     }
 
     //3. init viewport
-    glViewport(0,0,400,400);
+    //glViewport(0,0,400,400);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+
+    render =  reinterpret_cast<IRender *>(new TriangleRender());
+    render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
         processInput(window);
@@ -55,8 +59,10 @@ void GLWindow::init() {
         glClearColor(0.2f, 0.3f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glfwPollEvents();
+        render->onDraw();
+
         glfwSwapBuffers(window);
+        glfwPollEvents();
     }
     glfwTerminate();
 }
