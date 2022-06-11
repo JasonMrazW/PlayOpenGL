@@ -4,6 +4,7 @@
 
 #include "glwindow.h"
 #include "render/triangle_render.h"
+#include "render/advance_render"
 
 GLWindow::GLWindow() {
 
@@ -50,7 +51,7 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new TriangleRender());
+    render =  reinterpret_cast<IRender *>(new AdvanceRender());
     render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
@@ -64,6 +65,7 @@ void GLWindow::init() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    render->onDestroy();
     glfwTerminate();
 }
 

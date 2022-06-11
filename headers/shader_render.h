@@ -2,7 +2,7 @@
 // Created by bo on 2022/1/24.
 //
 
-#ifndef PLAYOPENGL_SHADER_RENDER_H
+#ifndef PLAYOPENGL_ADVANCE_RENDER_H
 #define PLAYOPENGL_SHADER_RENDER_H
 #include "GLUtils.h"
 #include "IRender.h"
@@ -36,7 +36,7 @@ private:
     uint32_t VAO;
 };
 
-#endif //PLAYOPENGL_SHADER_RENDER_H
+#endif //PLAYOPENGL_ADVANCE_RENDER_H
 //const char *vertex_shader_source = "#version 330 core\n"
 //                                   "layout (location = 0) in vec3 pos;\n"
 //                                   //"out vec4 renderColor;\n"

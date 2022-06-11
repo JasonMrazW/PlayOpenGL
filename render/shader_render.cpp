@@ -3,6 +3,7 @@
 //
 #include <cmath>
 #include "../headers/shader_render.h"
+
 constexpr float ShaderRender::vertices[];
 constexpr float ShaderRender::verticesAndColors[];
 

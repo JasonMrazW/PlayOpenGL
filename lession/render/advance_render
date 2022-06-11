@@ -1,0 +1,45 @@
+//
+// Created by 王波 on 2022/6/12.
+//
+
+#include <cmath>
+#include "advance_render.h"
+constexpr float AdvanceRender::vertices[];
+
+void AdvanceRender::onInit() {
+    shader = new Shader(vShaderPath, fShaderPath);
+
+    VAO = GLUtils::createVAO();
+    VBO = GLUtils::createBuffers();
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER,VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (vertices), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof (float ), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    //release
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+void AdvanceRender::onDraw() {
+    float timeValue = glfwGetTime();
+    float greenValue = sin(timeValue)/2.0f + 0.5f;
+    int vertexColorLocation = glGetUniformLocation(shader->programId, "outColor");
+
+    shader->use();
+    glUniform4f(vertexColorLocation, 0, greenValue, 0,0);
+
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glBindVertexArray(0);
+}
+
+void AdvanceRender::onDestroy() {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+}

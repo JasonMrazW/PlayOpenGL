@@ -28,7 +28,7 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
     link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp glad.c render/shader_render.cpp render/triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp render/texture_render.cpp headers/texture_render.h render/matrix_render.cpp headers/matrix_render.h render/matrix_3d_render.cpp headers/matrix_3d_render.h lession/glwindow.cpp lession/glwindow.h lession/render/triangle_render.cpp lession/render/triangle_render.h)
+add_executable(playOpenGL main.cpp glad.c render/shader_render.cpp render/triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp render/texture_render.cpp headers/texture_render.h render/matrix_render.cpp headers/matrix_render.h render/matrix_3d_render.cpp headers/matrix_3d_render.h lession/glwindow.cpp lession/glwindow.h lession/render/triangle_render.cpp lession/render/triangle_render.h lession/render/advance_render lession/render/advance_render.h)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)
@@ -36,4 +36,4 @@ target_link_libraries(playOpenGL GLEW)
 target_link_libraries(playOpenGL GLFW)
 #
 file(COPY resources DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-message("====CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+message("===CMAKE_cur_ver: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
