@@ -14,8 +14,9 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "arm64")
     include_directories(/opt/homebrew/Cellar/glew/2.2.0_1/include/)
     link_directories(/opt/homebrew/Cellar/glew/2.2.0_1/lib)
     # glfw的库目录路径
-    include_directories(/opt/homebrew/Cellar/glfw/3.3.4/include/)
-    link_directories(/opt/homebrew/Cellar/glfw/3.3.4/lib)
+
+    include_directories(/opt/homebrew/Cellar/glfw/3.3.7/include/)
+    link_directories(/opt/homebrew/Cellar/glfw/3.3.7/lib)
 endif ()
 
 if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
@@ -27,7 +28,7 @@ if (CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64")
     link_directories(/usr/local/Cellar/glfw/3.3.6/lib)
 endif ()
 
-add_executable(playOpenGL main.cpp glad.c render/shader_render.cpp render/triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp render/texture_render.cpp headers/texture_render.h render/matrix_render.cpp headers/matrix_render.h render/matrix_3d_render.cpp headers/matrix_3d_render.h)
+add_executable(playOpenGL main.cpp glad.c render/shader_render.cpp render/triangle.cpp headers/triangle.h headers/GLUtils.h headers/shader_render.h headers/IRender.h headers/shader.h shader.cpp render/texture_render.cpp headers/texture_render.h render/matrix_render.cpp headers/matrix_render.h render/matrix_3d_render.cpp headers/matrix_3d_render.h lession/glwindow.cpp lession/glwindow.h)
 
 # 指定glew库
 target_link_libraries(playOpenGL GLEW)

@@ -6,6 +6,9 @@
 #include "headers/matrix_3d_render.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <std/std_image.h>
+
+#include "lession/glwindow.h"
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     glViewport(0,0,width,height);
 }
@@ -22,6 +25,13 @@ void process_scroll_input(GLFWwindow *window, double xPos, double yPos);
 IRender *render = nullptr;
 
 int main() {
+    GLWindow* window = new GLWindow();
+    window->init();
+
+    return 0;
+}
+
+int main222() {
     GLFWwindow* window;
     /* Initialize the library */
     if (!glfwInit())
