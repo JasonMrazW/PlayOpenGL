@@ -37,7 +37,8 @@ void AdvanceRender::onDraw() {
 
     shader->use();
 //    glUniform4f(vertexColorLocation, 0, greenValue, 0,0);
-
+    float offset = 0.5f;
+    shader->setFloat("xOffset", offset);
 
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
