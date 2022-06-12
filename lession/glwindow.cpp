@@ -7,6 +7,7 @@
 #include "render/advance_render"
 #include "render/advance_texture_render.h"
 #include "render/advance_matrix_render.h"
+#include "render/split_render.h"
 
 GLWindow::GLWindow() {
 
@@ -53,7 +54,7 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new AdvanceMatrixRender());
+    render =  reinterpret_cast<IRender *>(new SplitRender());
     render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
