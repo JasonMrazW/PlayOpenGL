@@ -58,6 +58,8 @@ Shader::Shader(const char *vertex_shader_path, const char *fragment_shader_path)
         cout << "create shader program failed.\n" << info << endl;
         programId = -1;
         return;
+    } else {
+        cout << "load shader program suceed." << endl;
     }
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);

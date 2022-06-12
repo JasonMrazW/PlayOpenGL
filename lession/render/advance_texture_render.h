@@ -8,15 +8,13 @@
 
 #include "../../headers/IRender.h"
 
-class AdvanceTextureRender: IRender {
+class AdvanceTextureRender: public IRender {
 public:
     AdvanceTextureRender():IRender() {}
     ~AdvanceTextureRender() = default;
 
 private:
     void onInit() override;
-
-    void onDraw() override;
 
     void onDestroy() override;
 
@@ -50,6 +48,10 @@ private:
             1, 2, 3  // second triangle
     };
 
+protected:
+    virtual void initShader();
+
+    void onDraw() override;
 };
 
 

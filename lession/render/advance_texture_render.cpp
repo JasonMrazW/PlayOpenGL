@@ -9,7 +9,7 @@ constexpr float AdvanceTextureRender::rectangle_vertices[];
 constexpr uint32_t AdvanceTextureRender::indices[];
 
 void AdvanceTextureRender::onInit() {
-    shader = new Shader(vShaderPath, fShaderPath);
+    initShader();
 
     VAO = GLUtils::createVAO();
     VBO = GLUtils::createBuffers();
@@ -60,4 +60,8 @@ void AdvanceTextureRender::onDraw() {
 
 void AdvanceTextureRender::onDestroy() {
 
+}
+
+void AdvanceTextureRender::initShader() {
+    shader = new Shader(vShaderPath, fShaderPath);
 }
