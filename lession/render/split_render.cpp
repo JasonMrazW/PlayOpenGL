@@ -54,6 +54,7 @@ void SplitRender::onDraw() {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     //right-top
+    //顶点平移一倍，仅x轴平移
     trans = glm::translate(trans, glm::vec3(1.0f,0.0f,0.0f));
     shader->setMatrix("transform", glm::value_ptr(trans));
     shader->setFloat("xTex", 0.5f);
@@ -61,6 +62,7 @@ void SplitRender::onDraw() {
 
     //left-bottom
     trans = glm::mat4(1.0f);
+    //顶点平移一倍，仅y轴向下平移
     trans = glm::translate(trans, glm::vec3(0.0f,-1.0f,0.0f));
     shader->setMatrix("transform", glm::value_ptr(trans));
     shader->setFloat("xTex", 0.0f);
@@ -68,6 +70,7 @@ void SplitRender::onDraw() {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     //right-bottom
+    //顶点平移一倍，仅x轴右平移
     trans = glm::translate(trans, glm::vec3(1.0f,0.0f,0.0f));
     shader->setMatrix("transform", glm::value_ptr(trans));
     shader->setFloat("xTex", 0.5f);
