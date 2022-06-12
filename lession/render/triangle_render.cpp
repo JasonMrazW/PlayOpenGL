@@ -23,7 +23,7 @@ void TriangleRender::onInit() {
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     //draw triangle
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     //draw rectangle
     glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle_vertices), rectangle_vertices, GL_STATIC_DRAW);

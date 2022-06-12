@@ -5,6 +5,7 @@
 #include "glwindow.h"
 #include "render/triangle_render.h"
 #include "render/advance_render"
+#include "render/advance_texture_render.h"
 
 GLWindow::GLWindow() {
 
@@ -51,7 +52,7 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new AdvanceRender());
+    render =  reinterpret_cast<IRender *>(new AdvanceTextureRender());
     render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
