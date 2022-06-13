@@ -59,6 +59,12 @@ public:
         return data;
     }
 
+    static uint32_t createRBO() {
+        uint32_t buffer;
+        glGenRenderbuffers(1, &buffer);
+        return buffer;
+    }
+
     static uint32_t createTexture(int width, int height, int rgbFormat) {
         uint32_t textureId;
         //init texture

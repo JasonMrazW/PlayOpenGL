@@ -32,6 +32,7 @@ void AdvanceFrameBufferRender::initShader() {
     //init  custom shader
     QUAD_VAO = GLUtils::createVAO();
     QUAD_VBO = GLUtils::createBuffers();
+    QUAD_RBO = GLUtils::createRBO();
 
     glBindVertexArray(QUAD_VAO);
     glBindBuffer(GL_ARRAY_BUFFER, QUAD_VBO);
@@ -56,11 +57,20 @@ void AdvanceFrameBufferRender::onInit() {
     FBO = GLUtils::createFrameBuffer();
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 
+
     //create texture
     texture1 = GLUtils::createTexture(width, height, GL_RGB);
 
     //attach to fbo
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture1, 0);
+
+
+    //attach to rbo
+    glBindRenderbuffer(GL_RENDERBUFFER, QUAD_RBO);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+//    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, QUAD_RBO); // now actually attach it
+
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

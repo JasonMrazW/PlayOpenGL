@@ -31,6 +31,8 @@ private:
     int width, height;
     uint32_t QUAD_VAO;
     uint32_t QUAD_VBO;
+    uint32_t QUAD_RBO;
+
     constexpr static float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
         // positions   // texCoords
         -1.0f,  1.0f,  0.0f,0.0f, 1.0f,
