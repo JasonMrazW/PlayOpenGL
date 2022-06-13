@@ -14,11 +14,9 @@ public:
     ~AdvanceTextureRender() = default;
 
 private:
-    void onInit() override;
 
     void onDestroy() override;
 
-    uint32_t VAO;
     uint32_t VBO;
     uint32_t EBO;
 
@@ -52,6 +50,10 @@ protected:
     virtual void initShader();
 
     void onDraw() override;
+
+    void onInit() override;
+
+    uint32_t VAO;
 };
 
 

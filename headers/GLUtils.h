@@ -45,12 +45,35 @@ public:
         return VAO;
     }
 
+    static uint32_t createFrameBuffer() {
+        uint32_t buffer;
+        glGenFramebuffers(1, &buffer);
+        return buffer;
+    }
+
     static uint8_t * loadImage(const char *imagePath, int *width, int *height, int *nrChannels) {
         stbi_set_flip_vertically_on_load(true);
 
         uint8_t *data = stbi_load(imagePath, reinterpret_cast<int *>(width), reinterpret_cast<int *>(height),
                                   reinterpret_cast<int *>(nrChannels), 0);
         return data;
+    }
+
+    static uint32_t createTexture(int width, int height, int rgbFormat) {
+        uint32_t textureId;
+        //init texture
+        glGenTextures(1, &textureId);
+        glBindTexture(GL_TEXTURE_2D, textureId);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D, 0, rgbFormat, width, height, 0, rgbFormat, GL_UNSIGNED_BYTE, nullptr);
+        glGenerateMipmap(GL_TEXTURE_2D);
+
+        return textureId;
     }
 
     static uint32_t createTexture(const char *imagePath, int rgbFormat) {
