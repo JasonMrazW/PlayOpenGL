@@ -9,6 +9,7 @@
 #include "render/advance_matrix_render.h"
 #include "render/split_render.h"
 #include "render/advance_framebuffer_render.h"
+#include "render/cat_render.h"
 
 GLWindow::GLWindow() {
 
@@ -30,12 +31,12 @@ void GLWindow::init() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     //no border
-    glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+    //glfwWindowHint(GLFW_DECORATED, GL_FALSE);
     //transparent background
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GL_FALSE);
 
     //create window
-    GLFWwindow *window = glfwCreateWindow(800, 800, "opengl window", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 800, "Cat's Home", NULL, NULL);
     if (!window) {
         std::cout << "failed to create window" << endl;
         glfwTerminate();
@@ -55,13 +56,13 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new AdvanceMatrixRender());
+    render =  reinterpret_cast<IRender *>(new CatRender());
     render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
         processInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.1f, 0.1f);
+        glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         render->onDraw();
