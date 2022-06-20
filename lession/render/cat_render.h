@@ -25,6 +25,7 @@ private:
     uint32_t EBO;
 
     uint32_t pointNums;
+    uint32_t texture_body;
 
     const char *vShaderPath = "resources/shaders/cat/vShader.vs";
     const char *fShaderPath = "resources/shaders/cat/fShader.fs";
@@ -59,7 +60,7 @@ private:
 
     }
 
-    void buildCatsBody(list<Vec3> *targetVertexes, list<Vec3> *targetIndicates);
+    void buildCatsBody(list<Vec6> *targetVertexes, list<Vec3> *targetIndicates);
 };
 
 
