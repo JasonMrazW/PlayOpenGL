@@ -56,7 +56,7 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new CatRender());
+    render =  reinterpret_cast<IRender *>(new AdvanceFrameBufferRender(800,800));
     render->onInit();
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {

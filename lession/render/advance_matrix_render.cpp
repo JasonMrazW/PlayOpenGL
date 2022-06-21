@@ -14,8 +14,8 @@ void AdvanceMatrixRender::onDraw() {
     float y = (cos(value)/2.0f)+0.5f;
 
 
-    trans = glm::rotate(trans, glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-//    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
+//    trans = glm::rotate(trans, glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
 
     shader->setMatrix("transform", glm::value_ptr(trans));
 

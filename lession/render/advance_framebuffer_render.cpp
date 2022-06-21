@@ -12,7 +12,7 @@ void AdvanceFrameBufferRender::onDraw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_ATTACHMENT0);
     glEnable(GL_DEPTH_TEST);
 
-    AdvanceTextureRender::onDraw();
+    TriangleRender::onDraw();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glDisable(GL_DEPTH_TEST);
     glClearColor(0.1f, 0.1f,0.1f,0.1f);
@@ -21,14 +21,13 @@ void AdvanceFrameBufferRender::onDraw() {
     //draw texture
     screenShader->use();
     glBindVertexArray(QUAD_VAO);
-    glActiveTexture(GL_TEXTURE4);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }
 
 void AdvanceFrameBufferRender::initShader() {
-    AdvanceTextureRender::initShader();
     //init  custom shader
     QUAD_VAO = GLUtils::createVAO();
     QUAD_VBO = GLUtils::createBuffers();
@@ -53,6 +52,8 @@ void AdvanceFrameBufferRender::initShader() {
 }
 
 void AdvanceFrameBufferRender::onInit() {
+
+    initShader();
     //create fbo
     FBO = GLUtils::createFrameBuffer();
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
@@ -75,5 +76,6 @@ void AdvanceFrameBufferRender::onInit() {
         std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    AdvanceTextureRender::onInit();
+
+    TriangleRender::onInit();
 }

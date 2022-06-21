@@ -5,8 +5,10 @@ layout (location = 1) in vec3 vertexColor;
 
 out vec3 outColor;
 
+uniform mat4 transform = mat4(1.0f);
+
 void main()
 {
-    gl_Position = vec4(vertexPos, 1.0f);
+    gl_Position = transform * vec4(vertexPos, 1.0f);
     outColor = vertexColor;
 }

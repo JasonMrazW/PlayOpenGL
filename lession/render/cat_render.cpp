@@ -67,6 +67,20 @@ void CatRender::onDraw() {
 //    glDrawArrays(GL_TRIANGLES, 0, 12);
 //    //release
 //    glBindVertexArray(0);
+    shader->use();
+    //初始化单位矩阵
+    glm::mat4 trans = glm::mat4(1.0f);
+
+    float value = glfwGetTime();
+    float x = (sin(value)/2.0f)+0.1f;
+    float y = (cos(value)/2.0f)+0.1f;
+    float grad = sin(value) * 10.f;
+
+
+    trans = glm::rotate(trans, glm::radians(grad), glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
+
+    shader->setMatrix("transform", glm::value_ptr(trans));
 
 // draw rectangle
     glActiveTexture(GL_TEXTURE0);
