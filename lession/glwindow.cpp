@@ -10,6 +10,7 @@
 #include "render/split_render.h"
 #include "render/advance_framebuffer_render.h"
 #include "render/cat_render.h"
+#include "render/provider/cat_body_provider.h"
 
 GLWindow::GLWindow() {
 
@@ -56,8 +57,11 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    render =  reinterpret_cast<IRender *>(new AdvanceFrameBufferRender(800,800));
+    TextureDrawer *render =  new TextureDrawer();
+    render->setDataProvider(new CatBodyProvider());
     render->onInit();
+    renders->push_back(render);
+
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {
         processInput(window);
@@ -65,12 +69,19 @@ void GLWindow::init() {
         glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        render->onDraw();
+        list<IRender*>::iterator it;
+        for (it = renders->begin();it !=renders->end();it++) {
+            (*it)->onDraw();
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    render->onDestroy();
+    list<IRender*>::iterator it;
+    for (it = renders->begin();it !=renders->end();it++) {
+        (*it)->onDestroy();
+    }
+
     glfwTerminate();
 }
 

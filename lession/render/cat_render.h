@@ -12,15 +12,12 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-class CatRender: IRender {
+class CatRender: public IRender {
 public:
     CatRender():IRender() {}
     ~CatRender() = default;
 
 private:
-    void onInit() override;
-
-    void onDraw() override;
 
     uint32_t VAO;
     uint32_t VBO;
@@ -63,6 +60,11 @@ private:
     }
 
     void buildCatsBody(list<Vec6> *targetVertexes, list<Vec3> *targetIndicates);
+
+protected:
+    void onInit() override;
+
+    void onDraw() override;
 };
 
 

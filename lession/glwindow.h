@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "../headers/IRender.h"
+#include <list>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ public:
     static void processInput(GLFWwindow* window);
 
 private:
-    IRender *render = nullptr;
+    list<IRender*> *renders = new list<IRender*>();
 };
 
 

@@ -22,6 +22,22 @@ public:
     float x,y,z,r,g,b = 0.0f;
 };
 
+class Vec8 {
+public:
+    Vec8(float x, float y, float z, float r, float g, float b, float f, float p) {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+        this->r = r;
+        this->g = g;
+        this->b = b;
+        this->f = f;
+        this->p = p;
+    }
+
+    float x,y,z,r,g,b,f,p = 0.0f;
+};
+
 class Vec3 {
 public:
     Vec3(float x, float y, float z) {
@@ -64,6 +80,32 @@ public:
         targetVertexes->push_back(Vec6(rightX, rightY_Bottom, 0.0f,r, g, b));
         //right-top
         targetVertexes->push_back(Vec6(rightX, rightY_Top, 0.0f,r, g, b));
+
+
+        targetIndicates->push_back(Vec3(start, start + 1, start + 2));
+
+        targetIndicates->push_back(Vec3(start, start + 2, start + 3));
+    }
+
+    static void createRectangle(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates, float centerX, float centerY,
+                                float height, float width,float r, float g, float b) {
+        int start = targetVertexes->size();
+        float leftX = centerX - width/2;
+        float leftY_Top = centerY + height/2;
+        float leftY_Bottom = centerY - height/2;
+        float rightX = centerX + width/2;
+        float rightY_Top = leftY_Top;
+        float rightY_Bottom = leftY_Bottom;
+
+
+        //left-top
+        targetVertexes->push_back(Vec8(leftX, leftY_Top, 0.0f,r, g, b, 0.0f, 1.0f));
+        //left-bottom
+        targetVertexes->push_back(Vec8(leftX, leftY_Bottom, 0.0f,r, g, b,0.0f,0.0f));
+        //right-bottom
+        targetVertexes->push_back(Vec8(rightX, rightY_Bottom, 0.0f,r, g, b, 1.0f,0.0f));
+        //right-top
+        targetVertexes->push_back(Vec8(rightX, rightY_Top, 0.0f,r, g, b,1.0f,1.0f));
 
 
         targetIndicates->push_back(Vec3(start, start + 1, start + 2));
@@ -151,6 +193,22 @@ public:
             catVertices[i++] = tmp.r;
             catVertices[i++] = tmp.g;
             catVertices[i++] = tmp.b;
+        }
+    }
+
+    static float* convertListToArray(list<Vec8> *inputs, float catVertices[]) {
+        uint32_t i = 0;
+        while (!inputs->empty()) {
+            Vec8 tmp = inputs->front();
+            inputs->pop_front();
+            catVertices[i++] = tmp.x;
+            catVertices[i++] = tmp.y;
+            catVertices[i++] = tmp.z;
+            catVertices[i++] = tmp.r;
+            catVertices[i++] = tmp.g;
+            catVertices[i++] = tmp.b;
+            catVertices[i++] = tmp.f;
+            catVertices[i++] = tmp.p;
         }
     }
 

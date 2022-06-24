@@ -71,14 +71,14 @@ void CatRender::onDraw() {
     //初始化单位矩阵
     glm::mat4 trans = glm::mat4(1.0f);
 
-    float value = glfwGetTime();
-    float x = (sin(value)/2.0f)+0.1f;
-    float y = (cos(value)/2.0f)+0.1f;
-    float grad = sin(value) * 10.f;
-
-
-    trans = glm::rotate(trans, glm::radians(grad), glm::vec3(0.0f, 0.0f, 1.0f));
-    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
+//    float value = glfwGetTime();
+//    float x = (sin(value)/2.0f)+0.1f;
+//    float y = (cos(value)/2.0f)+0.1f;
+//    float grad = sin(value) * 10.f;
+//
+//
+//    trans = glm::rotate(trans, glm::radians(grad), glm::vec3(0.0f, 0.0f, 1.0f));
+//    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
 
     shader->setMatrix("transform", glm::value_ptr(trans));
 
@@ -107,7 +107,7 @@ void CatRender::buildCatsBody(list<Vec6> *targetVertexes, list<Vec3> *targetIndi
     //right-ear
     VertexUtils::createTriangle(targetVertexes, targetIndicates, -0.2f, 0.4f, -0.15f, 0.5f,0.5f,1.0f,1.0f);
     //body
-    VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.25f, 0.0f, 0.4f, 0.8f,0.8f,0.5f,0.2f);
+//    VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.25f, 0.0f, 0.4f, 0.8f,0.8f,0.5f,0.2f);
     //head
     VertexUtils::createCircleVertex(targetVertexes, targetIndicates, xCenter, yCenter, 0.2f,32, 0.8f,0.8f,0.0f);
     //left-feed
