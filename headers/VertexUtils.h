@@ -143,6 +143,38 @@ public:
         targetIndicates->emplace_back(Vec3(inputVertexSize, inputVertexSize + size, inputVertexSize + 1));
     }
 
+    static void createCircleVertex(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates, float centerX,
+                                   float centerY, double radius, int sides,float r, float g, float b) {
+        int inputVertexSize = targetVertexes->size();
+        //圆心顶点
+        targetVertexes->emplace_back(Vec8(centerX, centerY, 0.0f, r,g,b,0.5f,0.5f));
+
+        //弧度
+        double radUnit = 3.1415926535897932384626433832795 / 180;
+        //角度
+        double rad = 0;
+        int size = 0;
+        for (int angle = 0; angle < 360; angle += 360 / sides)
+        {
+            rad = angle * radUnit;
+            float x = cos(rad)* radius + centerX;
+            float y = sin(rad)* radius + centerY;
+            float tX =(cos(rad)+1)/2;
+            float tY = (sin(rad)+1)/2;
+            targetVertexes->emplace_back(Vec8(x, y, 0.0f,r, g, b,tX, tY));
+            size++;
+        }
+
+        //求 indicates
+        //顶点个数
+        for (int i = 1; i < size; i++) {
+            targetIndicates->emplace_back(Vec3(inputVertexSize, inputVertexSize + i, inputVertexSize + i + 1));
+        }
+
+        //原点
+        targetIndicates->emplace_back(Vec3(inputVertexSize, inputVertexSize + size, inputVertexSize + 1));
+    }
+
     static void createStar(list<Vec6> *targetVertexes, list<Vec3> *targetIndicates, float centerX, float centerY, double radius,float r, float g, float b) {
         int sides = 10;
         int inputVertexSize = targetVertexes->size();

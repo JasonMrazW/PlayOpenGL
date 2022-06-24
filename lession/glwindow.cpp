@@ -11,6 +11,9 @@
 #include "render/advance_framebuffer_render.h"
 #include "render/cat_render.h"
 #include "render/provider/cat_body_provider.h"
+#include "render/provider/cat_header_provider.h"
+#include "render/provider/cat_left_feet.h"
+#include "render/provider/cat_right_feet.h"
 
 GLWindow::GLWindow() {
 
@@ -61,6 +64,21 @@ void GLWindow::init() {
     render->setDataProvider(new CatBodyProvider());
     render->onInit();
     renders->push_back(render);
+
+    TextureDrawer *headerRender =  new TextureDrawer();
+    headerRender->setDataProvider(new CatHeaderRender());
+    headerRender->onInit();
+    renders->push_back(headerRender);
+
+//    TextureDrawer *leftFeetRender =  new TextureDrawer();
+//    leftFeetRender->setDataProvider(new CatLeftFeet());
+//    leftFeetRender->onInit();
+//    renders->push_back(leftFeetRender);
+//
+//    TextureDrawer *rightFeetRender =  new TextureDrawer();
+//    rightFeetRender->setDataProvider(new CatRightFeet());
+//    rightFeetRender->onInit();
+//    renders->push_back(rightFeetRender);
 
     //4. receive input event
     while(!glfwWindowShouldClose(window)) {

@@ -110,9 +110,9 @@ void CatRender::buildCatsBody(list<Vec6> *targetVertexes, list<Vec3> *targetIndi
 //    VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.25f, 0.0f, 0.4f, 0.8f,0.8f,0.5f,0.2f);
     //head
     VertexUtils::createCircleVertex(targetVertexes, targetIndicates, xCenter, yCenter, 0.2f,32, 0.8f,0.8f,0.0f);
-    //left-feed
+    //left-feet
     VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.1f, -0.3f, 0.2f, 0.2f,0.2f,0.8f,0.5f);
-    //right-feed
+    //right-feet
     VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.5f, -0.3f, 0.2f, 0.2f,0.2f,0.8f,0.5f);
 
     //left-eyes

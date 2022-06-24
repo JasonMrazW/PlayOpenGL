@@ -14,6 +14,7 @@
 class DataProvider {
 public:
     virtual void provideData(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates);
+    virtual char* provideImage();
 };
 
 class TextureDrawer: public IRender{

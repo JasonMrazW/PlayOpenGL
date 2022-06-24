@@ -16,6 +16,11 @@ protected:
     void provideData(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates)  override{
         VertexUtils::createRectangle(targetVertexes, targetIndicates, 0.25f, 0.0f, 0.4f, 0.8f,0.8f,0.5f,0.2f);
     }
+
+public:
+    char *provideImage() override {
+        return "resources/imgs/body.png";
+    }
 };
 
 

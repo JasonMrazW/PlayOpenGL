@@ -59,7 +59,7 @@ void TextureDrawer::onInit() {
     glBindVertexArray(0);
 
     shader->use();
-    texture_body = GLUtils::createTexture("resources/imgs/body.png", GL_RGBA);
+    texture_body = GLUtils::createTexture(provider->provideImage(), GL_RGBA);
     shader->setInt("textureBody", 0);
 }
 
@@ -67,14 +67,14 @@ void TextureDrawer::onDraw() {
     shader->use();
     //初始化单位矩阵
     glm::mat4 trans = glm::mat4(1.0f);
-//    float value = glfwGetTime();
-//    float x = (sin(value)/2.0f)+0.1f;
-//    float y = (cos(value)/2.0f)+0.1f;
-//    float grad = sin(value) * 10.f;
-//
-//
-//    trans = glm::rotate(trans, glm::radians(grad), glm::vec3(0.0f, 0.0f, 1.0f));
-//    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
+    float value = glfwGetTime();
+    float x = (sin(value)/2.0f)+0.1f;
+    float y = (cos(value)/2.0f)+0.1f;
+    float grad = sin(value) * 10.f;
+
+
+    trans = glm::rotate(trans, glm::radians(grad), glm::vec3(0.0f, 0.0f, 1.0f));
+    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
     shader->setMatrix("transform", glm::value_ptr(trans));
 
 // draw rectangle
@@ -92,5 +92,9 @@ void TextureDrawer::setDataProvider(DataProvider *provider) {
 }
 
 void DataProvider::provideData(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates) {
+
+}
+
+char* DataProvider::provideImage(){
 
 }
