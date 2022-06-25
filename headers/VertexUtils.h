@@ -201,18 +201,19 @@ public:
         GLfloat lon_step = 1.0f/Longitude;
         GLfloat lat_step = 1.0f/Latitude;
 
-        for(int lat = 0; lat < Longitude; lat++){  // 纬线u
-            for(int lon = 0;lon < Latitude; lon++){ // 经线v
+        for(int lon = 0; lon < Longitude; lon++){  // 纬线u
+            for(int lat = 0;lat < Latitude; lat++){ // 经线v
                 inputVertexSize = targetVertexes->size();
 
                 // 一次构造4个点，两个三角形，
-                Vec5 point1 = getPoint(lat * lat_step, lon * lon_step,radius);
+                Vec5 point1 = getPoint(lon * lon_step, lat * lat_step,radius);
                 targetVertexes->emplace_back(Vec8(point1.x, point1.y, point1.z , r, g, b,point1.a,point1.b));
-                Vec5 point2 = getPoint((lat+1) * lat_step, lon * lon_step,radius);
+
+                Vec5 point2 = getPoint((lon+1) * lon_step, lat * lat_step,radius);
                 targetVertexes->emplace_back(Vec8(point2.x, point2.y, point2.z , r, g, b,point2.a,point2.b));
-                Vec5 point3 = getPoint((lat+1) * lat_step, (lon+1) * lon_step,radius);
+                Vec5 point3 = getPoint((lon+1) * lon_step, (lat+1) * lat_step,radius);
                 targetVertexes->emplace_back(Vec8(point3.x, point3.y, point3.z , r, g, b,point3.a,point3.b));
-                Vec5 point4 = getPoint(lat * lat_step, (lon+1)  * lon_step,radius);
+                Vec5 point4 = getPoint(lon * lon_step, (lat+1)  * lat_step,radius);
                 targetVertexes->emplace_back(Vec8(point4.x, point4.y, point4.z , r, g, b,point4.a,point4.b));
 
                 targetIndicates->emplace_back(Vec3(inputVertexSize, inputVertexSize+3, inputVertexSize+2));
@@ -228,10 +229,8 @@ public:
         GLfloat z = r * std::cos(pi * u) * radius;
         GLfloat x = r * std::sin(pi * u) * std::cos(2 * pi * v)*radius;
         GLfloat y = r * std::sin(pi * u) * std::sin(2 * pi * v)*radius;
-        GLfloat j = v;
-        GLfloat i = 1-u;
         std::cout << x << endl;
-        return Vec5(x,y,z,i,j);
+        return Vec5(x,y,z,v,u);
     }
 
     static void createStar(list<Vec6> *targetVertexes, list<Vec3> *targetIndicates, float centerX, float centerY, double radius,float r, float g, float b) {

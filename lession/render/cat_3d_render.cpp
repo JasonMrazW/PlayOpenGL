@@ -60,27 +60,30 @@ void Cat3DRender::onInit() {
     glBindVertexArray(0);
 
     shader->use();
-    texture_body = GLUtils::createTexture("resources/imgs/header.png", GL_RGBA);
+    texture_body = GLUtils::createTexture("resources/imgs/earth.png", GL_RGBA);
     shader->setInt("textureBody", 0);
 }
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  10.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp    = glm::vec3(0.0f, 1.0f,  0.0f);
-
+int grad = 0;
 void Cat3DRender::onDraw() {
     shader->use();
     //初始化单位矩阵
     glm::mat4 model = glm::mat4(1.0f);
     float value = glfwGetTime();
-    float grad = 90.0f;
+    grad = (grad -1)%(360);
 
-    model = glm::rotate(model, glm::radians(grad), glm::vec3(1.0f, 0.0f, 0.0f));
+    std::cout << value<< endl;
+
+    model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(grad+0.1f), glm::vec3(0.0f, 0.0f, 1.0f));
     shader->setMatrix("model", glm::value_ptr(model));
 
     glm::mat4 view = glm::mat4 (1.0f);
     //远离z轴
 //    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-//    view       = glm::rotate(view, glm::radians(grad),glm::vec3(0.0f, 0.0f, 1.0f));
+//    view       = glm::rotate(view, glm::radians(360.0f),glm::vec3(0.0f, 0.0f, 1.0f));
 //    view       = glm::rotate(view, glm::radians(40.0f),glm::vec3(1.0f, 0.0f, 0.0f));
     view       = glm::translate(view, glm::vec3(0.0f, 0.0f, -10.0f));
 
@@ -102,8 +105,8 @@ void Cat3DRender::onDraw() {
 //    glCullFace(GL_BACK);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBindVertexArray(VAO);
-    glDrawElements(GL_LINE_LOOP, pointNums, GL_UNSIGNED_INT, 0);
-//    glDrawElements(GL_TRIANGLES, pointNums, GL_UNSIGNED_INT, 0);
+//    glDrawElements(GL_LINE_LOOP, pointNums, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, pointNums, GL_UNSIGNED_INT, 0);
 
     glBindVertexArray(0);
 }
