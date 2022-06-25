@@ -14,6 +14,7 @@
 #include "render/provider/cat_header_provider.h"
 #include "render/provider/cat_left_feet.h"
 #include "render/provider/cat_right_feet.h"
+#include "render/cat_3d_render.h"
 
 GLWindow::GLWindow() {
 
@@ -60,15 +61,18 @@ void GLWindow::init() {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
-    TextureDrawer *render =  new TextureDrawer();
-    render->setDataProvider(new CatBodyProvider());
-    render->onInit();
-    renders->push_back(render);
-
-    TextureDrawer *headerRender =  new TextureDrawer();
-    headerRender->setDataProvider(new CatHeaderRender());
-    headerRender->onInit();
-    renders->push_back(headerRender);
+//    TextureDrawer *render =  new TextureDrawer();
+//    render->setDataProvider(new CatBodyProvider());
+//    render->onInit();
+//    renders->push_back(render);
+//
+//    TextureDrawer *headerRender =  new TextureDrawer();
+//    headerRender->setDataProvider(new CatHeaderRender());
+//    headerRender->onInit();
+//    renders->push_back(headerRender);
+    IRender *cat3DRender = new Cat3DRender();
+    cat3DRender->onInit();
+    renders->push_back(cat3DRender);
 
 //    TextureDrawer *leftFeetRender =  new TextureDrawer();
 //    leftFeetRender->setDataProvider(new CatLeftFeet());
@@ -85,7 +89,8 @@ void GLWindow::init() {
         processInput(window);
 
         glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
         list<IRender*>::iterator it;
         for (it = renders->begin();it !=renders->end();it++) {

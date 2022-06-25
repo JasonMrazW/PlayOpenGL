@@ -15,7 +15,8 @@ protected:
     void provideData(list<Vec8> *targetVertexes, list<Vec3> *targetIndicates)  override{
         float xCenter = -0.32f;
         float yCenter = 0.28f;
-        VertexUtils::createCircleVertex(targetVertexes, targetIndicates, xCenter, yCenter, 0.2f,32, 0.8f,0.8f,0.0f);
+        float zCenter = 0.0f;
+        VertexUtils::createCircleVertex(targetVertexes, targetIndicates, xCenter, yCenter,zCenter, 0.2f,32, 0.8f,0.8f,0.0f);
     }
 
 public:
