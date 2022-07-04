@@ -6,10 +6,12 @@ out vec3 renderColor;
 out vec2 TexCoord;
 
 uniform mat4 transform = mat4(1.0f);
+uniform float xTex;
+uniform float yTex;
 
 void main()
 {
-    gl_Position = transform * vec4(vertexPos, 1.0f);
+    gl_Position =  transform * vec4(vertexPos, 1.0f);
     renderColor = colorPos;
-    TexCoord = texCoord;
+    TexCoord = vec2(texCoord.x + xTex, texCoord.y + yTex);
 }

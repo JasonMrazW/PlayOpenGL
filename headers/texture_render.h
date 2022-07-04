@@ -41,15 +41,18 @@ protected:
 //例如：全0.5，表示texture大小是原来的1/4大小
 constexpr static float verticesAndColors[] = {
         // positions          // colors           // texture coords
-        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-        0.5f,  -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+        1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   0.25f, 1.0f,   // top right
+        1.0f,  -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   0.25f, 0.0f,   // bottom right
+        -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+        -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
 };
     uint32_t textureA = -1;
     uint32_t textureB = -1;
 
     uint32_t createTexture(const char* imagePath, uint32_t rgbFormat);
+
+    uint32_t FBO;
+    uint32_t fbo_outputTexture;
 };
 
 #endif //PLAYOPENGL_TEXTURE_RENDER_H

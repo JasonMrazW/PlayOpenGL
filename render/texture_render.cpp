@@ -13,6 +13,8 @@ constexpr uint32_t TextureRender::indices[];
 
 using namespace std;
 
+
+
 void TextureRender::onInit() {
     shader = new Shader(vShaderPath, fShaderPath);
 
@@ -43,26 +45,49 @@ void TextureRender::onInit() {
     glBindVertexArray(0);
 
     //create texture
-    textureA = createTexture("resources/imgs/container.jpg", GL_RGB);
-    textureB = createTexture("resources/imgs/awesomeface.png", GL_RGBA);
+    textureA = createTexture("resources/imgs/earth.png", GL_RGBA);
+//    textureB = createTexture("resources/imgs/awesomeface.png", GL_RGBA);
     shader->use();
     shader->setInt("texture1", 0);
-    shader->setInt("texture2", 1);
+//    shader->setInt("texture2", 1);
 }
+int w = 1080;
+int h = 1920;
+int b_w = 1604;
+int b_h = 780;
+
 
 void TextureRender::onDraw() {
+    glViewport(0.0f, 0.0f, w, h);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureA);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, textureB);
 
     float time = glfwGetTime();
     float greenValue = (sin(time)/2.0f) + 0.5f; //-0.5~0.5===>0~1
     shader->setFloat("mixValue", greenValue);
 
+    if (w > h) {
+        float ratio = ((float)w/h/b_h*b_w);
+        glm::mat4 trans = glm::ortho(-ratio, ratio, -1.0f, 1.0f);
+        shader->setMatrix("transform", glm::value_ptr(trans));
+    } else {
+        float ratio = ((float)b_w/b_h)/((float)(w*4)/h);
+        glm::mat4 trans = glm::ortho(-1.0f, 1.0f, -ratio, ratio );
+        shader->setMatrix("transform", glm::value_ptr(trans));
+    }
+
+    //初始化单位矩阵
+    glm::mat4 trans = glm::mat4(1.0f);
+
+    //left-top
+    glBindVertexArray(VAO);
+    shader->setFloat("xTex", 0.25f);
+    shader->setFloat("yTex", 0.0f);
+
     shader->use();
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 }
 
 void TextureRender::onDestroy() {

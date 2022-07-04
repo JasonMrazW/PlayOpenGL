@@ -11,6 +11,7 @@
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
     glViewport(0,0,width,height);
+    std::cout << "screen: " << width << "x" << height << endl;
 }
 
 void process_input(GLFWwindow *window) {
@@ -24,14 +25,14 @@ void process_scroll_input(GLFWwindow *window, double xPos, double yPos);
 
 IRender *render = nullptr;
 
-int main() {
+int main22() {
     GLWindow* window = new GLWindow();
     window->init();
 
     return 0;
 }
 
-int main22() {
+int main() {
     GLFWwindow* window;
     /* Initialize the library */
     if (!glfwInit())
@@ -42,7 +43,7 @@ int main22() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(540, 540, "glWindow", NULL, NULL);
+    window = glfwCreateWindow(540, 960, "glWindow", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -58,7 +59,7 @@ int main22() {
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    render = reinterpret_cast<IRender *>(new Matrix3DRender());
+    render = reinterpret_cast<IRender *>(new TextureRender());
     render->onInit();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

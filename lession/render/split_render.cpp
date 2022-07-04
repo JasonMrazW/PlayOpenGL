@@ -30,7 +30,7 @@ void SplitRender::onInit() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    texture1 = GLUtils::createTexture("resources/imgs/container.jpg", GL_RGB);
+    texture1 = GLUtils::createTexture("resources/imgs/earth.png", GL_RGBA);
     shader->use();
     shader->setFloat("texture1", 0);
 
